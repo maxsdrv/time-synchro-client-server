@@ -1,0 +1,23 @@
+project(asio_tcp_client_server)
+cmake_minimum_required(VERSION 3.0)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(Boost 1.7.0)
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+endif()
+
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+if (NOT DEFINED CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE "Debug")
+endif()
+
+include_directories(include)
+
+file(GLOB_RECURSE SOURCE ./src/*.cpp )
+    
+add_executable(${PROJECT_NAME} ${SOURCE} main.cpp)
